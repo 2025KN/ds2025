@@ -1,12 +1,17 @@
-#156page
-#l1과 l2 리스트 사이에 중복되는 값을 리스트 l3에 넣는 함수
-def inters(l1, l2):
-    s1 = set(l1)
-    s2 = set(l2)
-    #return list(s1.intersection(s2))
-    return list(s1 & s2) # & = 교집합 기호, | = 합집합 기호, - = 차집합 기호
+def my_zip(l1,l2):
+    l3 = list()
+    length = 0
+    if len(l1) < len(l2):
+        length = len(l1)
+    else:
+        length = len(l2)
+    for i in range (length):
+        l3.append((l1[i],l2[i]))
+    return  l3
 
+groups = ['HOT','Seventeen', 'Black Pink', 'NJZ']
+#reatings = [1,2,4,3, 100]   #두개의 리스트 중에서 더 작은 (여기서는 groups)리스트 갯수만큼 내부 반복
+reatings = [1,2,4,3]
 
-l1 = [45,5,22,31,7,19]
-l2 = [22,1,5,2,7,28,27,19,13,41]
-print(inters(l1,l2))
+groups_rating = my_zip(groups, reatings)
+print(groups_rating)
