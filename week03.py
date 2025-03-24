@@ -1,11 +1,10 @@
 #156page
 #l1과 l2 리스트 사이에 중복되는 값을 리스트 l3에 넣는 함수
 def inters(l1, l2):
-    l3 = []
-    for v in l1:
-        if v in l2:
-            l3.append(v)
-    return l3
+    s1 = set(l1)
+    s2 = set(l2)
+    #return list(s1.intersection(s2))
+    return list(s1 & s2) # & = 교집합 기호, | = 합집합 기호, - = 차집합 기호
 
 
 l1 = [45,5,22,31,7,19]
