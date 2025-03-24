@@ -1,15 +1,6 @@
-def move_zeros(l):
-    zero_idx = 0
-    for i in range(len(l)):
-        n = l[i]
-        if n != 0:
-            l[zero_idx] = n
-            if zero_idx != i:
-                l[i] = 0
-            zero_idx = zero_idx + 1
-    return l
+groups = ['HOT','Seventeen', 'Black Pink', 'NJZ']
+#reatings = [1,2,4,3, 100]   #두개의 리스트 중에서 더 작은 (여기서는 groups)리스트 갯수만큼 내부 반복
+reatings = [1,2,4,3]
 
-
-l = [99, 0, -7, 0, 16]
-move_zeros(l)
-print(l)
+groups_rating = list(zip(groups, reatings))   #zip객체(튜플) 생성 후 리스트로 만듬
+print(groups_rating)
