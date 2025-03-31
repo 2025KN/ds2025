@@ -20,7 +20,20 @@ class LinkedList:
             current = current.link #move current
         current.link = Node(data)
 
+    def __str__(self):
+        current = self.head
+        result = ""
+        while current is not None:
+            # print(current.data)
+            result = result + str(current.data) + " -> "
+            current = current.link
+        #return "END"
+        return result + "END"
+         # return "Linked list!"
+
 ll = LinkedList()   #LinkedList 의 init이 작동
 ll.append(8)
 ll.append(10)
 ll.append(-9)
+
+print(ll)
