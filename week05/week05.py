@@ -1,43 +1,20 @@
-class Node:
-    def __init__(self, data, link=None):
-        self.data = data
-        self.link = link
+s1 = []
 
-class Stack:
-    def __init__(self):
-        self.top = None
+s1.append("Data structure")  #push
+s1.append("Database")
 
-    def push(self, data):
-        node = Node(data)
-        if self.top is None:
-            self.top = node
-        else:
-            node.link = self.top
-            self.top = node
+print(s1[-1])       #peek
 
-    def pop(self):
-        if self.top is None:
-            return "Stack in empty!"
-        popped_node = self.top
-        self.top = self.top.link
-        popped_node.link = None    #링크드 리스트의 노드가 삭제될 때 남은 링크도 없애주기
-        return popped_node.data
+print(s1)
 
-    def peek(self):
-        if self.top is None:
-            return "Stack in empty!"
-        return self.top.data
+print(s1.pop())     #pop
 
+print(s1)
 
+print(s1.pop())     #pop
 
-s1 = Stack()
-print(s1.pop())
-print(s1.peek())
-s1.push("Data structure")
-s1.push("Database")
-print(s1.pop())
-print(s1.peek())
+print(s1)
 
+print(s1.pop())     #pop, IndexError
 
-#for i in range(3):
-#    print(s1.pop())
+print(s1)
