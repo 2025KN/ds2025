@@ -1,20 +1,20 @@
-s1 = []
+#print(1+2))
 
-s1.append("Data structure")  #push
-s1.append("Database")
+def is_valid_parentheses(expression : str) -> bool: #type hint, (매개타입) -> 리턴타입
+    stack = list()
+    for letter in expression:
+        if letter == "(":
+            stack.append(letter)
+        if letter ==")":
+            if len(stack) ==0:
+                return False        #(1+2))
+            else:
+                stack.pop()
 
-print(s1[-1])       #peek
+    return len(stack) == 0          #(1+2), ((3*2)/2), ((3*2/2)
 
-print(s1)
 
-print(s1.pop())     #pop
-
-print(s1)
-
-print(s1.pop())     #pop
-
-print(s1)
-
-print(s1.pop())     #pop, IndexError
-
-print(s1)
+print(is_valid_parentheses("(1+2))"))
+print(is_valid_parentheses("(1+2)"))
+print(is_valid_parentheses("((3*2)/2)"))
+print(is_valid_parentheses("((3*2/2)"))
