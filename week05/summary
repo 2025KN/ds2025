@@ -3,3 +3,6 @@ stack
  -push, pop
 
 #역방향 리스트 제일 뒤가 -1
+
+
+링크드 리스트 스택에서 size나  is_empty 만들어보기
