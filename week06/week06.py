@@ -17,7 +17,19 @@ class Queue:
             self.rear = node
         else:                       #처음 만든 게 아닐 땐
             self.rear.link = node   #처음 만들어진 node의 링크를 이번에 새로 만든 node로 연결
-            self.rear = node        #rear가 이번에 새로 만든 node를 가리키도록.
+            self.rear = node        #rear가 이번에 새로 만든 node를 가리키도록. #move
+
+    def dequeue(self):
+        if self.front is None: #큐가 비어있을 때
+            raise IndexError("Queue is empty")
+        self.size = self.size - 1
+        temp = self.front
+        self.front = self.front.link    #move
+        if self.front is None:
+            self.rear = None
+        return temp.data
+
+
 
 
 
@@ -25,3 +37,6 @@ q = Queue()
 q.enqueue("Data structure")
 q.enqueue("Database")
 print(q.size, q.front.data, q.rear.data)
+print(q.dequeue())
+print(q.size, q.front.data, q.rear.data)
+print(q.dequeue())
