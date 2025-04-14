@@ -24,7 +24,8 @@ class Queue:
             raise IndexError("Queue is empty")
         self.size = self.size - 1
         temp = self.front
-        self.front = self.front.link    #move
+        self.front = self.front.link    #move #큐에 node가 하나뿐일 때, front를 None으로 바꿈
+        temp.link = None                #남아있는 link 삭제
         if self.front is None:
             self.rear = None
         return temp.data
@@ -36,7 +37,11 @@ class Queue:
 q = Queue()
 q.enqueue("Data structure")
 q.enqueue("Database")
+
 print(q.size, q.front.data, q.rear.data)
+
 print(q.dequeue())
 print(q.size, q.front.data, q.rear.data)
+
 print(q.dequeue())
+print(q.size, q.front, q.rear)
