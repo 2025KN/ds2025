@@ -30,49 +30,61 @@ class TreeNode:
 		self.data = None
 		self.right = None
 
-#이진탐색트리 BST
+
+def insert(root, value):
+	node = TreeNode()
+	node.data = value
+
+	if root is None:
+		return node
+
+	current = root
+	while True:
+		if value < current.data:
+			if current.left is None:
+				current.left = node
+				break
+			else:
+				current = current.left  # 이동
+		else:
+			if current.right is None:
+				current.right = node
+				break
+			else:
+				current = current.right  # 이동
+	return root
+
+
+
+
 if __name__ == "__main__":
 	numbers = [10,15,8,3,9, 100, 7, 13]
 	root = None
 
-	node = TreeNode()
-	node.data = numbers[0] #10
-	root = node
+	for number in numbers:
+		root = insert(root,number)
+		
+	
+	print('BST 구성완료')
+	post_order(root)
 
-	for number in numbers[1:]:
-		node = TreeNode()
-		node.data = number
 
-		current = root
-		while True:
-			if number < current.data:
-				if current.left is None:
-					current.left = node
-					break
-				else:
-					current = current.left  #이동
-			else:
-				if current.right is None:
-					current.right = node
-					break
-				else:
-					current = current.right  # 이동
-	print('BST 구성 완료')
 
-	find_number = int(input())
-	current = root
-	while True:
-		if find_number == current.data:
-			print(f"{find_number}을(를) 찾았습니다")
-			break
-		elif find_number < current.data:
-			if current.left is None:
-				print(f"{find_number}이(가) 존재하지 않습니다")
-				break
-			current = current.left
-		else:
-			if current.right is None:
-				print(f"{find_number}이(가) 존재하지 않습니다")
-				break
-			current = current.right
+# #search 함수만들기
+# 	find_number = int(input())
+# 	current = root
+# 	while True:
+# 		if find_number == current.data:
+# 			print(f"{find_number}을(를) 찾았습니다")
+# 			break
+# 		elif find_number < current.data:
+# 			if current.left is None:
+# 				print(f"{find_number}이(가) 존재하지 않습니다")
+# 				break
+# 			current = current.left
+# 		else:
+# 			if current.right is None:
+# 				print(f"{find_number}이(가) 존재하지 않습니다")
+# 				break
+# 			current = current.right
 
