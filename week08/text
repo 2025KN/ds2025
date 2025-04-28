@@ -1,10 +1,12 @@
-pre order
+순회 방식 3가지
+
+pre order 전위
  PLR
 hs sk hw zz mb sm
 
-in order
+in order 중위
  LPR
 
-post order
+post order 후위
  LRP            반복문, 재귀함수
  hw zz sl sm mb hs
