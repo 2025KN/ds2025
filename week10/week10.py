@@ -56,8 +56,7 @@ def insert(root, value):
     return root
 
 def search(find_number):
-#search 함수만들기
-
+    #search 함수만들기
 	current = root
 	while True:
 		if find_number == current.data:
@@ -71,6 +70,24 @@ def search(find_number):
 				return False
 			current = current.right
 
+
+def delete(node, value):
+    if node is None:
+        return None
+
+    if value < node.data:
+        node.left = delete(node.left, value)
+    elif value > node.data:
+        node.right = delete(node.right, value)
+    else: #같은 경우, 삭제할 노드를 찾음.
+        # leaf 노드거나 자식이 1개인 경우의 노드를 삭제
+        if node.left is None:
+            return node.right
+        elif node.right is None:
+            return node.left
+    return node
+
+
 if __name__ == "__main__":
     numbers = [10, 15, 8, 3, 9, 100, 7, 13]
     root = None
@@ -79,7 +96,11 @@ if __name__ == "__main__":
         root = insert(root, number)
 
     print('BST 구성완료')
-    post_order(root)
+    post_order(root) #root가 항상 마지막에 처리
+    print()
+    in_order(root) #L P R
+    print()
+    pre_order(root) #root가 항상 처음에
     print()
     find_number = int(input("찾는 수는?"))
     if search(find_number):
@@ -87,4 +108,11 @@ if __name__ == "__main__":
     else:
         print(f"{find_number}을(를) 찾지 못함")
 
-
+    delete_number = int(input("제거할 숫자는? "))
+    root = delete(root, delete_number)
+    post_order(root)  # root가 항상 마지막에 처리
+    print()
+    in_order(root)  # L P R
+    print()
+    pre_order(root)  # root가 항상 처음에
+    print()
