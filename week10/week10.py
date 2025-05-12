@@ -55,9 +55,9 @@ def insert(root, value):
                 current = current.right  # 이동
     return root
 
-def search():
+def search(find_number):
 #search 함수만들기
-	find_number = int(input("찾는 수는?"))
+
 	current = root
 	while True:
 		if find_number == current.data:
@@ -84,6 +84,7 @@ if __name__ == "__main__":
     print('BST 구성완료')
     post_order(root)
     print()
-    search()
+    find_number = int(input("찾는 수는?"))
+    search(find_number)
 
 
