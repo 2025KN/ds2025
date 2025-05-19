@@ -12,6 +12,9 @@ graph = [
 def dfs(g, i, visited):
     visited[i] = True
     print(chr(ord('A')+i), end=' ')
+    for j in range(len(graph)):
+        if g[i][j] == 1 and not visited[j]:
+            dfs(g,j,visited)
 
 visited_dfs = [False for _ in range(len(graph))]
-dfs(graph, 0, visited_dfs)
+dfs(graph, 1, visited_dfs)
