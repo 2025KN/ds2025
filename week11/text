@@ -1,3 +1,6 @@
 그래프의 깊이우선, 너비우선탐색
 
 BFS는 재귀함수 필요없음.
+
+양방향 큐 deque
+from collections import deque
