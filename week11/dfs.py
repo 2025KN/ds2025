@@ -16,5 +16,5 @@ def dfs(g, i, visited):
         if g[i][j] == 1 and not visited[j]:
             dfs(g,j,visited)
 
-visited_dfs = [False for _ in range(len(graph))]
-dfs(graph, 1, visited_dfs)
+visited_dfs = [False for _ in range(len(graph))] #방문 여부 확인 배열
+dfs(graph, 7, visited_dfs)
