@@ -1,48 +1,33 @@
 class Graph:
-	def __init__ (self, size):
-		self.graph = [[0 for _ in range(size)] for _ in range(size)]
+    def __init__ (self, size):
+        self.graph = [[0 for _ in range(size)] for _ in range(size)]
 
 def print_graph(g) :
-	print(' ', end = ' ')
-	for v in range(len(g.graph)) :
-		print(cities[v], end =' ')
-	print()
-	for row in range(len(g.graph)) :
-		print(cities[row], end =' ')
-		for col in range(len(g.graph)) :
-			print(f"{g.graph[row][col]:2d}", end=' ')
-		print()
-	print()
+    print(' ', end = ' ')
+    for v in range(len(g.graph)) :
+        print(cities[v], end =' ')
+    print()
+    for row in range(len(g.graph)) :
+        print(cities[row], end =' ')
+        for col in range(len(g.graph)) :
+            print(f"{g.graph[row][col]:2d}", end=' ')
+        print()
+    print()
+
+
+
+
+def dfs(g, current, visited):  # 재귀함수 또는 스택 사용
+    visited.append(current)
+    for vertex in range(graph_size):
+        if g.graph[current][vertex] > 0 and vertex not in visited:
+            dfs(g, vertex, visited)
+
 
 def find_vertex(g, city) :
-	stack = list()      #깊이우선을 위한 stack구조 사용. stack이 비었으면 모든곳을 방문 한 것.
-	visited_cites = list()
-
-	i = 0	# 시작 정점
-	stack.append(i)
-	visited_cites.append(i)
-
-	while stack:
-		next = None
-		for j in range(graph_size):
-			if g.graph[i][j] != 0:  # 연결되어 있으면
-				if j in visited_cites:	# 방문한 적이 있는 정점
-					pass
-				else :			# 방문한 적이 없으면
-					next = j  #  다음 정점으로 지정
-					break
-
-		if next is not None:				# 다음에 방문할 정점이 있는 경우
-			i = next
-			stack.append(i)  # push
-			visited_cites.append(i)  # push
-		else :					# 다음에 방문할 정점이 없는 경우
-			i = stack.pop()
-
-	if city in visited_cites:
-		return True
-	else :
-		return False
+    visited_cites = list()
+    dfs(g, 0, visited_cites)
+    return city in visited_cites
 
 
 g1 = None
@@ -64,9 +49,9 @@ print_graph(g1)
 
 edges = list()  # 결과적으로 2d list
 for i in range(graph_size) :
-	for j in range(graph_size) :
-		if g1.graph[i][j] != 0 :
-			edges.append([g1.graph[i][j], i, j])
+    for j in range(graph_size) :
+        if g1.graph[i][j] != 0 :
+            edges.append([g1.graph[i][j], i, j])
 print(edges)
 
 edges.sort(reverse=True)
@@ -74,36 +59,36 @@ print(edges)
 
 new_ary = list()
 for i in range(1, len(edges), 2):
-	new_ary.append(edges[i])
+    new_ary.append(edges[i])
 print(new_ary)
 
 index = 0
 while len(new_ary) > graph_size - 1:	# 간선의 개수가 '정점 개수-1'일 때까지 반복
-	start = new_ary[index][1]
-	end = new_ary[index][2]
-	save_cost = new_ary[index][0]
+    start = new_ary[index][1]
+    end = new_ary[index][2]
+    save_cost = new_ary[index][0]
 
-	g1.graph[start][end] = 0
-	g1.graph[end][start] = 0
+    g1.graph[start][end] = 0
+    g1.graph[end][start] = 0
 
-	start_reachable = find_vertex(g1, start)
-	end_reachable = find_vertex(g1, end)
+    start_reachable = find_vertex(g1, start)
+    end_reachable = find_vertex(g1, end)
 
-	if start_reachable and end_reachable :
-		del new_ary[index]
-	else:
-		g1.graph[start][end] = save_cost
-		g1.graph[end][start] = save_cost
-		index = index + 1
+    if start_reachable and end_reachable :
+        del new_ary[index]
+    else:
+        g1.graph[start][end] = save_cost
+        g1.graph[end][start] = save_cost
+        index = index + 1
 
 print('최소 비용의 도로 연결도')
 print_graph(g1)
 
 total_cost = 0
 for i in range(graph_size):
-	for j in range(graph_size):
-		if g1.graph[i][j] != 0:
-			total_cost = total_cost + g1.graph[i][j]
+    for j in range(graph_size):
+        if g1.graph[i][j] != 0:
+            total_cost = total_cost + g1.graph[i][j]
 
 total_cost = total_cost // 2
 print(f"최소 비용 :  {total_cost}")
