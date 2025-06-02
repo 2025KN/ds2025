@@ -2,6 +2,25 @@ class Graph:
     def __init__ (self, size):
         self.graph = [[0 for _ in range(size)] for _ in range(size)]
 
+
+class DisjointSet: #크루스칼 알고리즘을 위한 유틸리티 클래스
+    def __init__(self, n):
+        self.parent = [i for i in range(n)]
+        # n = 6 >> [0,1,2,3,4,5]
+
+    def find(self, z):
+        if self.parent[z] != z:
+            self.parent[z] = self.find(self.parent[z]) #경로 압축.
+        return self.parent[z]
+
+    def merge(self, x, y): #Union
+        x_root = self.find(x)
+        y_root = self.find(y)
+        if x_root != y_root:
+            self.parent[y_root] = x_root    #[0,0,2,3,4,5] 0에 1이 붙음.
+            return True
+        return False
+
 def print_graph(g) :
     print(' ', end = ' ')
     for v in range(len(g.graph)) :
@@ -16,18 +35,6 @@ def print_graph(g) :
 
 
 
-
-def dfs(g, current, visited):  # 재귀함수 또는 스택 사용
-    visited.append(current)
-    for vertex in range(graph_size):
-        if g.graph[current][vertex] > 0 and vertex not in visited:
-            dfs(g, vertex, visited)
-
-
-def find_vertex(g, city) :
-    visited_cites = list()
-    dfs(g, 0, visited_cites)
-    return city in visited_cites
 
 
 g1 = None
@@ -54,41 +61,24 @@ for i in range(graph_size) :
             edges.append([g1.graph[i][j], i, j])
 print(edges)
 
-edges.sort(reverse=True)
+edges.sort()    #오름차순, reverse = True 하면 내림차순.
 print(edges)
 
-new_ary = list()
-for i in range(1, len(edges), 2):
-    new_ary.append(edges[i])
-print(new_ary)
+ds = DisjointSet(graph_size)
+mst_edges = list()
+mst_cost = 0
 
-index = 0
-while len(new_ary) > graph_size - 1:	# 간선의 개수가 '정점 개수-1'일 때까지 반복
-    start = new_ary[index][1]
-    end = new_ary[index][2]
-    save_cost = new_ary[index][0]
+for c, s, e in edges:   #가중치, 시작도시, 도착도시
+    if ds.merge(s, e):
+        mst_edges.append((c, s, e))
+        mst_cost = mst_cost + c
+print(mst_edges)
 
-    g1.graph[start][end] = 0
-    g1.graph[end][start] = 0
+mst_graph = Graph(graph_size)
+for c, s, e in mst_edges:
+    mst_graph.graph[s][e] = c
+    mst_graph.graph[e][s] = c
 
-    start_reachable = find_vertex(g1, start)
-    end_reachable = find_vertex(g1, end)
-
-    if start_reachable and end_reachable :
-        del new_ary[index]
-    else:
-        g1.graph[start][end] = save_cost
-        g1.graph[end][start] = save_cost
-        index = index + 1
-
-print('최소 비용의 도로 연결도')
-print_graph(g1)
-
-total_cost = 0
-for i in range(graph_size):
-    for j in range(graph_size):
-        if g1.graph[i][j] != 0:
-            total_cost = total_cost + g1.graph[i][j]
-
-total_cost = total_cost // 2
-print(f"최소 비용 :  {total_cost}")
+print('MST 도로 연결도')
+print_graph(mst_graph)
+print(f"최소 비용 :  {mst_cost}")
