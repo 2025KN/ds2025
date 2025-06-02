@@ -14,19 +14,19 @@ def print_graph(g) :
 		print()
 	print()
 
-def find_vertex(g, find_vtx) :
+def find_vertex(g, city) :
 	stack = list()
-	visited_ary = list()
+	visited_cites = list()
 
 	i = 0	# 시작 정점
 	stack.append(i)
-	visited_ary.append(i)
+	visited_cites.append(i)
 
 	while stack:
 		next = None
 		for j in range(graph_size):
 			if g.graph[i][j] != 0:  # 연결되어 있으면
-				if j in visited_ary:	# 방문한 적이 있는 정점
+				if j in visited_cites:	# 방문한 적이 있는 정점
 					pass
 				else :			# 방문한 적이 없으면
 					next = j  #  다음 정점으로 지정
@@ -35,11 +35,11 @@ def find_vertex(g, find_vtx) :
 		if next is not None:				# 다음에 방문할 정점이 있는 경우
 			i = next
 			stack.append(i)  # push
-			visited_ary.append(i)  # push
+			visited_cites.append(i)  # push
 		else :					# 다음에 방문할 정점이 없는 경우
 			i = stack.pop()
 
-	if find_vtx in visited_ary:
+	if city in visited_cites:
 		return True
 	else :
 		return False
