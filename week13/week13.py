@@ -15,7 +15,7 @@ def print_graph(g) :
 	print()
 
 def find_vertex(g, city) :
-	stack = list()
+	stack = list()      #깊이우선을 위한 stack구조 사용. stack이 비었으면 모든곳을 방문 한 것.
 	visited_cites = list()
 
 	i = 0	# 시작 정점
