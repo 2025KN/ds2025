@@ -1,5 +1,7 @@
 # s, e = input().split()
 # print(type(s),type(e))
+import math
+
 
 # inputs = input().split()
 # t = []
@@ -14,7 +16,7 @@ def is_prime(n) -> bool: #시간복잡도 O(n)
     if n <=1:
         return False
     else:
-        for i in range(2, n):
+        for i in (2, int(math.sqrt(n) + 1)):
             if n % i == 0:
                 return False
     return True
